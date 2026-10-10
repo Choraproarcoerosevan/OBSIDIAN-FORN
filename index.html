@@ -1,61 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0812">
-  <title>VENIX — Loja Online</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Market</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#08090d;color:#fff}
+header{position:sticky;top:0;z-index:10;background:#0d0f16ee;backdrop-filter:blur(12px);border-bottom:1px solid #202431}
+.nav{max-width:1100px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:24px;font-weight:900}.logo span{color:#7c5cff}
+nav a{color:#aaa;text-decoration:none;margin:0 10px;font-weight:700}nav a:hover{color:#fff}
+.cart{background:#7c5cff;border:0;color:white;padding:10px 15px;border-radius:10px;font-weight:800;cursor:pointer}
+.hero{max-width:1100px;margin:45px auto 25px;padding:45px 25px;background:linear-gradient(135deg,#17132c,#10131d);border:1px solid #29253f;border-radius:24px}
+.hero h1{font-size:clamp(35px,6vw,62px);line-height:1.05}.hero h1 span{color:#8c6cff}
+.hero p{color:#aeb2c0;margin:16px 0 25px;max-width:600px;font-size:17px}
+.btn{display:inline-block;background:#7c5cff;color:#fff;text-decoration:none;padding:13px 20px;border-radius:11px;font-weight:800}
+.wrap{max-width:1100px;margin:auto;padding:20px}
+.title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 15px}
+.title h2{font-size:25px}
+.filters{display:flex;gap:10px;overflow:auto;padding-bottom:10px}
+.filter{white-space:nowrap;background:#11141c;border:1px solid #252a38;color:#bbb;padding:10px 14px;border-radius:10px;cursor:pointer}
+.filter.active{background:#7c5cff;color:#fff;border-color:#7c5cff}
+.search{width:100%;margin:12px 0 20px;background:#11141c;border:1px solid #252a38;color:white;padding:14px;border-radius:12px;outline:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#10131a;border:1px solid #232735;border-radius:16px;overflow:hidden;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:#7c5cff}
+.pic{height:145px;background:linear-gradient(135deg,#252047,#141722);display:flex;align-items:center;justify-content:center;font-size:55px}
+.info{padding:15px}.game{font-size:12px;color:#8f7cff;font-weight:800;text-transform:uppercase}.name{font-size:18px;font-weight:800;margin:7px 0}.desc{color:#8f95a5;font-size:13px;min-height:34px}.bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.price{font-size:19px;font-weight:900}.buy{border:0;background:#7c5cff;color:#fff;padding:9px 12px;border-radius:9px;font-weight:800;cursor:pointer}
+footer{text-align:center;color:#6f7482;padding:50px 20px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}.box{width:min(430px,100%);background:#11141c;border:1px solid #292e3c;border-radius:18px;padding:22px}.box h2{margin-bottom:10px}.box p{color:#9ca1af;margin-bottom:18px}.close{float:right;background:none;border:0;color:#aaa;font-size:25px;cursor:pointer}.pix{background:#171b25;border-radius:10px;padding:14px;margin:12px 0;color:#ddd}.confirm{width:100%;border:0;background:#7c5cff;color:#fff;padding:13px;border-radius:10px;font-weight:900;cursor:pointer}
+@media(max-width:650px){nav{display:none}.hero{margin:20px 12px}.wrap{padding:12px}}
+</style>
 </head>
 <body>
-  <div class="announcement">✦ VENIX STORE · Ofertas e novidades toda semana</div>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="Venix início"><span class="brand-mark">V</span><span>VENIX<span class="brand-dot">.</span></span></a>
-    <nav><a href="#produtos">Produtos</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
-    <button class="cart-button" id="openCart" aria-label="Abrir carrinho">Carrinho <span id="cartCount">0</span></button>
-  </header>
+<header><div class="nav"><div class="logo">ROBLOX<span>MARKET</span></div><nav><a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#suporte">Suporte</a></nav><button class="cart" onclick="openCart()">🛒 Carrinho <span id="count">0</span></button></div></header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="pulse"></span> SUA LOJA DIGITAL</span>
-        <h1>Encontre. Escolha.<br><span>É seu.</span></h1>
-        <p>Produtos selecionados, atendimento direto e uma experiência de compra simples. Bem-vindo à VENIX.</p>
-        <div class="hero-actions"><a class="primary-button" href="#produtos">Explorar produtos <span>↗</span></a><a class="text-link" href="#contato">Fale com a gente</a></div>
-        <div class="hero-stats"><div><strong>100%</strong><small>Atendimento direto</small></div><div><strong>Pix</strong><small>Pagamento combinado</small></div><div><strong>Vários</strong><small>Tipos de produto</small></div></div>
-      </div>
-      <div class="hero-art" aria-label="Arte decorativa roxa">
-        <div class="orb orb-one"></div><div class="orb orb-two"></div><div class="hero-card">
-          <div class="mini-label">VENIX / SELEÇÃO</div><div class="cube">V</div><div class="hero-card-bottom"><span>DROP<br><b>001</b></span><span class="card-arrow">↗</span></div>
-        </div><div class="floating-tag tag-top">NOVAS OFERTAS ✦</div><div class="floating-tag tag-bottom">SIMPLES. RÁPIDO. VENIX.</div>
-      </div>
-    </section>
+<section class="hero" id="inicio">
+<h1>Itens e contas para<br><span>seus jogos Roblox.</span></h1>
+<p>Uma loja moderna para comprar produtos de Roblox com entrega rápida. Escolha seu jogo e encontre o item que procura.</p>
+<a class="btn" href="#produtos">Ver produtos</a>
+</section>
 
-    <section class="trust-strip"><span>✦ Produtos variados</span><span>✦ Compra pelo carrinho</span><span>✦ Finalize pelo Discord</span><span>✦ Pix combinado com a loja</span></section>
+<main class="wrap" id="produtos">
+<div class="title"><h2>Produtos</h2></div>
+<input class="search" id="search" placeholder="🔎 Pesquisar produto..." oninput="render()">
+<div class="filters">
+<button class="filter active" onclick="setCat('Todos',this)">Todos</button>
+<button class="filter" onclick="setCat('Blox Fruits',this)">Blox Fruits</button>
+<button class="filter" onclick="setCat('Steal a Brainrot',this)">Steal a Brainrot</button>
+<button class="filter" onclick="setCat('Adopt Me',this)">Adopt Me</button>
+</div>
+<div class="grid" id="grid"></div>
+</main>
 
-    <section class="products-section" id="produtos">
-      <div class="section-heading"><div><span class="eyebrow">CATÁLOGO</span><h2>Escolha seu próximo <span>achado.</span></h2></div><p>Adicione ao carrinho e envie seu pedido pelo Discord.</p></div>
-      <div class="filters" id="filters">
-        <button class="filter active" data-filter="Todos">Todos</button><button class="filter" data-filter="Games">Games</button><button class="filter" data-filter="Acessórios">Acessórios</button><button class="filter" data-filter="Digital">Digital</button>
-      </div>
-      <div class="product-grid" id="productGrid"></div>
-      <p class="demo-note">Os produtos e preços exibidos são exemplos editáveis. Confirme estoque e preço com a loja antes de pagar.</p>
-    </section>
+<footer id="suporte">ROBLOX MARKET • Atendimento e suporte<br><small>Este modelo é uma demonstração. Configure seu pagamento e sistema de entrega antes de vender.</small></footer>
 
-    <section class="promo" id="sobre"><div class="promo-icon">✦</div><div><span class="eyebrow">POR QUE VENIX?</span><h2>Comprar sem complicação.</h2><p>Escolha seus produtos, revise o carrinho e fale com a gente para confirmar os detalhes do pedido.</p></div><a class="secondary-button" href="#contato">Conhecer a loja ↗</a></section>
+<div class="modal" id="modal"><div class="box"><button class="close" onclick="closeCart()">×</button><h2>Seu carrinho</h2><div id="cartItems"></div><div class="pix">Total: <b id="total">R$ 0,00</b><br><small>Pagamento real ainda não está conectado.</small></div><button class="confirm" onclick="alert('Checkout de demonstração!')">Continuar para pagamento</button></div></div>
 
-    <section class="contact-section" id="contato"><div><span class="eyebrow">VAMOS CONVERSAR</span><h2>Seu pedido começa <span>aqui.</span></h2><p>Finalize pelo Discord e combine o pagamento via Pix após confirmar os detalhes.</p></div><div class="contact-card"><div class="contact-symbol">◈</div><div><b>Atendimento VENIX</b><small>Pedidos e dúvidas</small></div><a id="discordLink" href="#" target="_blank" rel="noopener">Abrir Discord ↗</a></div></section>
-  </main>
-
-  <footer><a class="brand" href="#"><span class="brand-mark">V</span><span>VENIX<span class="brand-dot">.</span></span></a><span>© <span id="year"></span> VENIX Store. Feito para comprar melhor.</span><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Voltar ao topo ↑</a></footer>
-
-  <div class="overlay" id="overlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho de compras" aria-hidden="true">
-    <div class="drawer-header"><div><span class="eyebrow">SEU PEDIDO</span><h2>Carrinho</h2></div><button id="closeCart" class="close-button" aria-label="Fechar carrinho">×</button></div>
-    <div id="cartItems" class="cart-items"><div class="empty-cart">Seu carrinho está vazio.<br><span>Adicione algo que você curtiu.</span></div></div>
-    <div class="drawer-bottom"><div class="total-row"><span>Total estimado</span><strong id="cartTotal">R$ 0,00</strong></div><small>O valor final e a disponibilidade serão confirmados pelo atendimento.</small><button id="checkout" class="primary-button full">Enviar pedido pelo Discord ↗</button><button id="copyOrder" class="secondary-button full">Copiar resumo do pedido</button></div>
-  </aside>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="script.js"></script>
+<script>
+const products=[
+{id:1,game:'Blox Fruits',name:'Conta Blox Fruits',desc:'Conta com itens e progresso.',price:29.90,icon:'🍎'},
+{id:2,game:'Blox Fruits',name:'Fruta do Dragão',desc:'Item digital para Blox Fruits.',price:14.90,icon:'🐉'},
+{id:3,game:'Steal a Brainrot',name:'Brainrot Raro',desc:'Item digital para sua coleção.',price:19.90,icon:'🧠'},
+{id:4,game:'Steal a Brainrot',name:'Pet 500M+',desc:'Pet de alto valor no jogo.',price:39.90,icon:'👾'},
+{id:5,game:'Adopt Me',name:'Pet Especial',desc:'Pet digital para Adopt Me.',price:24.90,icon:'🐶'},
+{id:6,game:'Blox Fruits',name:'Pacote de Itens',desc:'Seleção de itens digitais.',price:49.90,icon:'⚔️'}
+];
+let cat='Todos',cart=[];
+function setCat(c,b){cat=c;document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
+function render(){
+ const q=document.getElementById('search').value.toLowerCase();
+ const list=products.filter(p=>(cat==='Todos'||p.game===cat)&&(p.name.toLowerCase().includes(q)||p.game.toLowerCase().includes(q)));
+ document.getElementById('grid').innerHTML=list.map(p=>`<article class="card"><div class="pic">${p.icon}</div><div class="info"><div class="game">${p.game}</div><div class="name">${p.name}</div><div class="desc">${p.desc}</div><div class="bottom"><span class="price">R$ ${p.price.toFixed(2).replace('.',',')}</span><button class="buy" onclick="add(${p.id})">Comprar</button></div></div></article>`).join('');
+}
+function add(id){cart.push(products.find(p=>p.id===id));document.getElementById('count').textContent=cart.length;openCart()}
+function openCart(){document.getElementById('modal').classList.add('show');let total=cart.reduce((a,p)=>a+p.price,0);document.getElementById('total').textContent='R$ '+total.toFixed(2).replace('.',',');document.getElementById('cartItems').innerHTML=cart.length?cart.map((p,i)=>`<div style="padding:10px 0;border-bottom:1px solid #252a38">${p.name} — R$ ${p.price.toFixed(2).replace('.',',')} <button onclick="removeItem(${i})" style="float:right;background:none;border:0;color:#ff6b6b;cursor:pointer">remover</button></div>`).join(''):'<p>Seu carrinho está vazio.</p>'}
+function removeItem(i){cart.splice(i,1);document.getElementById('count').textContent=cart.length;openCart()}
+function closeCart(){document.getElementById('modal').classList.remove('show')}
+render();
+</script>
 </body>
 </html>
